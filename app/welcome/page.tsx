@@ -202,7 +202,7 @@ export default function WelcomePage() {
                 })
                 .finally(() => setIsDossierLoading(false))
         }
-    }, [contextLoading, userProfile, hasSeenModal])
+    }, [contextLoading, userProfile, hasSeenModal, hasAttemptedSynthesis])
 
     const handleConfirmDossier = async () => {
         if (dossier && userProfile?.id) {
@@ -333,18 +333,18 @@ export default function WelcomePage() {
                                             <span className="text-[10px] font-black text-si-blue-primary uppercase tracking-widest block mb-4">① Verified Entity Profile</span>
                                             <h3 className="text-3xl md:text-4xl font-black text-si-navy font-outfit mb-6 tracking-tight leading-tight">{dossier?.name || userProfile?.organization_name}</h3>
                                             
-                                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                                                <div className="bg-slate-50/80 border border-slate-200/50 rounded-2xl p-5 shadow-sm hover:border-si-blue-primary/30 transition-colors">
-                                                    <p className="text-[9px] text-slate-400 font-black uppercase tracking-widest mb-1.5 flex items-center gap-2"><Calendar className="w-3.5 h-3.5 text-si-blue-primary" /> Established</p>
-                                                    <p className="text-xl font-black text-si-navy font-outfit">{dossier?.founded}</p>
+                                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+                                                <div className="bg-slate-50/80 border border-slate-200/50 rounded-2xl p-5 shadow-sm hover:border-si-blue-primary/30 transition-colors min-w-0">
+                                                    <p className="text-[9px] text-slate-400 font-black uppercase tracking-widest mb-1.5 flex items-center gap-2"><Calendar className="w-3.5 h-3.5 text-si-blue-primary flex-shrink-0" /> Established</p>
+                                                    <p className="text-base font-black text-si-navy font-outfit break-words">{dossier?.founded}</p>
                                                 </div>
-                                                <div className="bg-slate-50/80 border border-slate-200/50 rounded-2xl p-5 shadow-sm hover:border-si-blue-primary/30 transition-colors">
-                                                    <p className="text-[9px] text-slate-400 font-black uppercase tracking-widest mb-1.5 flex items-center gap-2"><Users className="w-3.5 h-3.5 text-si-blue-primary" /> Workforce</p>
-                                                    <p className="text-xl font-black text-si-navy font-outfit">{dossier?.employees}</p>
+                                                <div className="bg-slate-50/80 border border-slate-200/50 rounded-2xl p-5 shadow-sm hover:border-si-blue-primary/30 transition-colors min-w-0">
+                                                    <p className="text-[9px] text-slate-400 font-black uppercase tracking-widest mb-1.5 flex items-center gap-2"><Users className="w-3.5 h-3.5 text-si-blue-primary flex-shrink-0" /> Workforce</p>
+                                                    <p className="text-base font-black text-si-navy font-outfit break-words">{dossier?.employees}</p>
                                                 </div>
-                                                <div className="bg-si-navy border border-si-navy rounded-2xl p-5 shadow-xl shadow-si-navy/10 col-span-2">
-                                                    <p className="text-[9px] text-white/40 font-black uppercase tracking-widest mb-1.5 flex items-center gap-2"><TrendingUp className="w-3.5 h-3.5 text-si-blue-primary" /> Annual Revenue Scale</p>
-                                                    <p className="text-xl font-black text-white font-outfit">{dossier?.annualRevenue}</p>
+                                                <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:border-si-blue-primary/30 transition-colors sm:col-span-2 lg:col-span-1 min-w-0">
+                                                    <p className="text-[9px] text-slate-400 font-black uppercase tracking-widest mb-1.5 flex items-center gap-2"><TrendingUp className="w-3.5 h-3.5 text-si-blue-primary flex-shrink-0" /> Annual Revenue Scale</p>
+                                                    <p className="text-base font-black text-si-navy font-outfit break-words">{dossier?.annualRevenue}</p>
                                                 </div>
                                             </div>
 
@@ -556,19 +556,19 @@ export default function WelcomePage() {
                                             </div>
                                         )}
                                         {Array.isArray(dossier?.cloudInfrastructure) && dossier.cloudInfrastructure.length > 0 && (
-                                            <div className="bg-si-navy p-6 rounded-2xl border border-white/10 shadow-xl">
+                                            <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
                                                 <span className="text-[10px] font-black text-si-blue-primary uppercase tracking-widest block mb-3 flex items-center gap-2"><Cloud className="w-3 h-3" /> Cloud Infrastructure</span>
                                                 <div className="flex flex-wrap gap-2">
                                                     {dossier.cloudInfrastructure.map((cloud: string, idx: number) => (
-                                                        <span key={idx} className="text-[10px] font-black text-white bg-white/10 border border-white/10 px-2.5 py-1.5 rounded-lg">{cloud}</span>
+                                                        <span key={idx} className="text-[10px] font-black text-si-navy bg-slate-50 border border-slate-200 px-2.5 py-1.5 rounded-lg">{cloud}</span>
                                                     ))}
                                                 </div>
                                                 {Array.isArray(dossier?.complianceFrameworks) && dossier.complianceFrameworks.length > 0 && (
-                                                    <div className="mt-4 pt-4 border-t border-white/5">
-                                                        <span className="text-[9px] font-black text-white/40 uppercase tracking-widest block mb-2">Compliance Attestations</span>
+                                                    <div className="mt-4 pt-4 border-t border-slate-100">
+                                                        <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-2">Compliance Attestations</span>
                                                         <div className="flex flex-wrap gap-1.5">
                                                             {dossier.complianceFrameworks.map((frame: string, idx: number) => (
-                                                                <span key={idx} className="text-[9px] font-black text-emerald-400 bg-emerald-400/10 px-2 py-0.5 rounded-full border border-emerald-400/20">{frame}</span>
+                                                                <span key={idx} className="text-[9px] font-black text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">{frame}</span>
                                                             ))}
                                                         </div>
                                                     </div>
@@ -886,20 +886,20 @@ export default function WelcomePage() {
                             initial={{ opacity: 0, scale: 0.95 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.8, delay: 0.2 }}
-                            className="bg-si-navy text-white rounded-[48px] p-10 border border-white/5 shadow-2xl shadow-si-navy/40 relative overflow-hidden group"
+                            className="bg-white text-si-navy rounded-[48px] p-10 border border-slate-100 shadow-xl shadow-slate-200/40 relative overflow-hidden group"
                         >
                             <div className="relative z-10">
                                 <div className="flex items-center justify-between mb-12">
                                     <div className="flex items-center gap-3">
-                                        <div className="w-10 h-10 bg-si-blue-primary/20 rounded-xl flex items-center justify-center text-si-blue-primary border border-si-blue-primary/30">
+                                        <div className="w-10 h-10 bg-si-blue-primary/10 rounded-xl flex items-center justify-center text-si-blue-primary border border-si-blue-primary/20">
                                             <Shield className="w-5 h-5" />
                                         </div>
                                         <span className="text-[10px] font-black uppercase tracking-[0.4em] text-si-blue-primary">Verified Node</span>
                                     </div>
                                     <div className="text-right">
-                                        <span className="text-[9px] font-bold text-white/30 uppercase tracking-widest block">System Status</span>
-                                        <span className="text-[10px] text-emerald-400 font-black uppercase flex items-center gap-2 justify-end">
-                                            <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse" />
+                                        <span className="text-[9px] font-bold text-slate-300 uppercase tracking-widest block">System Status</span>
+                                        <span className="text-[10px] text-emerald-600 font-black uppercase flex items-center gap-2 justify-end">
+                                            <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
                                             Synchronized
                                         </span>
                                     </div>
@@ -916,24 +916,24 @@ export default function WelcomePage() {
                                         return (
                                             <div className="space-y-8 animate-pulse">
                                                 <div className="flex items-center gap-5 opacity-50">
-                                                    <div className="w-14 h-14 bg-white/10 rounded-2xl" />
+                                                    <div className="w-14 h-14 bg-slate-100 rounded-2xl" />
                                                     <div className="space-y-2">
-                                                        <div className="h-6 w-48 bg-white/10 rounded" />
-                                                        <div className="h-3 w-32 bg-white/10 rounded" />
+                                                        <div className="h-6 w-48 bg-slate-100 rounded" />
+                                                        <div className="h-3 w-32 bg-slate-100 rounded" />
                                                     </div>
                                                 </div>
                                                 <div className="grid grid-cols-2 gap-4">
-                                                    {[1, 2].map(i => <div key={i} className="h-16 bg-white/5 rounded-2xl border border-white/5" />)}
+                                                    {[1, 2].map(i => <div key={i} className="h-16 bg-slate-50 rounded-2xl border border-slate-100" />)}
                                                 </div>
                                                 <div className="space-y-3">
-                                                    <div className="h-3 w-24 bg-white/10 rounded" />
+                                                    <div className="h-3 w-24 bg-slate-100 rounded" />
                                                     <div className="flex gap-2">
-                                                        {[1, 2, 3].map(i => <div key={i} className="h-8 w-20 bg-white/5 rounded-lg" />)}
+                                                        {[1, 2, 3].map(i => <div key={i} className="h-8 w-20 bg-slate-50 rounded-lg border border-slate-100" />)}
                                                     </div>
                                                 </div>
                                                 <div className="space-y-3">
-                                                    <div className="h-3 w-32 bg-white/10 rounded" />
-                                                    <div className="h-20 bg-white/5 rounded-2xl" />
+                                                    <div className="h-3 w-32 bg-slate-100 rounded" />
+                                                    <div className="h-20 bg-slate-50 rounded-2xl border border-slate-100" />
                                                 </div>
                                                 <p className="text-[10px] text-si-blue-primary font-black uppercase tracking-widest text-center animate-bounce">
                                                     Synthesizing OSINT Intelligence...
@@ -948,18 +948,18 @@ export default function WelcomePage() {
                                         return (
                                             <div className="space-y-8">
                                                 <div>
-                                                    <span className="text-[10px] font-black text-white/30 uppercase tracking-widest block mb-4">Organizational Legacy</span>
+                                                    <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-4">Organizational Legacy</span>
                                                     <div className="flex items-center gap-5">
-                                                        <div className="w-14 h-14 bg-white/5 rounded-2xl border border-white/10 flex items-center justify-center text-si-blue-primary group-hover:bg-si-blue-primary group-hover:text-white transition-all duration-500 flex-shrink-0">
+                                                        <div className="w-14 h-14 bg-si-blue-primary/10 rounded-2xl border border-si-blue-primary/20 flex items-center justify-center text-si-blue-primary group-hover:bg-si-blue-primary group-hover:text-white transition-all duration-500 flex-shrink-0">
                                                             <Building2 className="w-7 h-7" />
                                                         </div>
                                                         <div className="flex-1 min-w-0">
-                                                            <h2 className="text-xl font-black font-outfit tracking-tight mb-0.5 italic text-white leading-tight underline decoration-si-blue-primary/30 truncate">
+                                                            <h2 className="text-xl font-black font-outfit tracking-tight mb-0.5 italic text-si-navy leading-tight underline decoration-si-blue-primary/30 truncate">
                                                                 {activeDossier.name}
                                                             </h2>
                                                             <div className="flex items-center gap-2">
                                                                 <div className="w-1.5 h-1.5 rounded-full bg-si-blue-primary" />
-                                                                <span className="text-[9px] font-bold text-white/40 uppercase tracking-tighter truncate">
+                                                                <span className="text-[9px] font-bold text-slate-400 uppercase tracking-tighter truncate">
                                                                     {activeDossier.founded ? `Est. ${activeDossier.founded}` : 'Established Node'} • {activeDossier.hq || 'Global Reach'}
                                                                 </span>
                                                             </div>
@@ -968,23 +968,23 @@ export default function WelcomePage() {
                                                 </div>
 
                                                 <div className="grid grid-cols-2 gap-4">
-                                                    <div className="bg-white/5 rounded-2xl p-4 border border-white/5 shadow-sm">
-                                                        <span className="text-[8px] font-black text-white/30 uppercase tracking-wider block mb-1.5">Leadership</span>
-                                                        <p className="text-[10px] font-bold text-white/70 truncate">{activeDossier.leadership || 'Verified Stakeholders'}</p>
-                                                        <p className="text-[8px] text-white/40 mt-0.5 uppercase">Corporate Control</p>
+                                                    <div className="bg-slate-50 rounded-2xl p-4 border border-slate-100 shadow-sm">
+                                                        <span className="text-[8px] font-black text-slate-400 uppercase tracking-wider block mb-1.5">Leadership</span>
+                                                        <p className="text-[10px] font-bold text-si-navy truncate">{activeDossier.leadership || 'Verified Stakeholders'}</p>
+                                                        <p className="text-[8px] text-slate-400 mt-0.5 uppercase">Corporate Control</p>
                                                     </div>
-                                                    <div className="bg-white/5 rounded-2xl p-4 border border-white/5 shadow-sm">
-                                                        <span className="text-[8px] font-black text-white/30 uppercase tracking-wider block mb-1.5">Market Status</span>
-                                                        <p className="text-[10px] font-bold text-white/70 truncate">{activeDossier.annualRevenue || activeDossier.employees || 'Active Scale'}</p>
-                                                        <p className="text-[8px] text-white/40 mt-0.5 uppercase">Operational Magnitude</p>
+                                                    <div className="bg-slate-50 rounded-2xl p-4 border border-slate-100 shadow-sm">
+                                                        <span className="text-[8px] font-black text-slate-400 uppercase tracking-wider block mb-1.5">Market Status</span>
+                                                        <p className="text-[10px] font-bold text-si-navy truncate">{activeDossier.annualRevenue || activeDossier.employees || 'Active Scale'}</p>
+                                                        <p className="text-[8px] text-slate-400 mt-0.5 uppercase">Operational Magnitude</p>
                                                     </div>
                                                 </div>
 
                                                 <div>
-                                                    <span className="text-[10px] font-black text-white/30 uppercase tracking-widest block mb-3">Core Portfolio</span>
+                                                    <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-3">Core Portfolio</span>
                                                     <div className="flex flex-wrap gap-2">
                                                         {(activeDossier.portfolio && activeDossier.portfolio.length > 0 ? activeDossier.portfolio.slice(0, 4) : ["Standardized Infrastructure", "Secure Network Ops"]).map((item: string, idx: number) => (
-                                                            <div key={idx} className="px-2.5 py-1.5 bg-white/5 border border-white/10 rounded-lg text-[9px] font-bold text-white/60 tracking-tight whitespace-nowrap hover:bg-si-blue-primary/10 hover:border-si-blue-primary/30 transition-colors">
+                                                            <div key={idx} className="px-2.5 py-1.5 bg-slate-50 border border-slate-100 rounded-lg text-[9px] font-bold text-slate-600 tracking-tight whitespace-nowrap hover:bg-si-blue-primary/10 hover:border-si-blue-primary/30 transition-colors">
                                                                 {item}
                                                             </div>
                                                         ))}
@@ -992,14 +992,14 @@ export default function WelcomePage() {
                                                 </div>
 
                                                 <div>
-                                                    <span className="text-[10px] font-black text-white/30 uppercase tracking-widest block mb-3">Business Model</span>
-                                                    <p className="text-[10px] font-medium text-white/50 leading-relaxed italic line-clamp-3">
+                                                    <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-3">Business Model</span>
+                                                    <p className="text-[10px] font-medium text-slate-500 leading-relaxed italic line-clamp-3">
                                                         {activeDossier.businessModel || "Critical operator within the supply chain network managing interconnected vendor operations."}
                                                     </p>
                                                 </div>
 
                                                 <div>
-                                                    <span className="text-[10px] font-black text-white/30 uppercase tracking-widest block mb-4">Inherent Cyber Risk Factors</span>
+                                                    <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-4">Inherent Cyber Risk Factors</span>
                                                     <div className="space-y-4">
                                                         {(activeDossier.cyberStats || [
                                                             { label: "Business Interruption Risk", value: 85, reasoning: "Operational dependency on uptime." },
@@ -1008,10 +1008,10 @@ export default function WelcomePage() {
                                                         ]).map((stat: { label: string, value: number, reasoning: string }, idx: number) => (
                                                             <div key={idx} className="space-y-1">
                                                                 <div className="flex justify-between text-[9px] items-center mb-0.5">
-                                                                    <span className="text-white/50 font-bold uppercase tracking-tighter">{stat.label}</span>
+                                                                    <span className="text-slate-400 font-bold uppercase tracking-tighter">{stat.label}</span>
                                                                     <span className={`${stat.value > 70 ? 'text-rose-500' : 'text-si-blue-primary'} font-black uppercase text-[8px]`}>{stat.value}% RISK</span>
                                                                 </div>
-                                                                <div className="h-1 w-full bg-white/5 rounded-full overflow-hidden">
+                                                                <div className="h-1 w-full bg-slate-100 rounded-full overflow-hidden">
                                                                     <motion.div 
                                                                         initial={{ width: 0 }}
                                                                         animate={{ width: `${stat.value}%` }}
@@ -1019,19 +1019,19 @@ export default function WelcomePage() {
                                                                         className={`h-full bg-gradient-to-r ${stat.value > 70 ? 'from-rose-500 to-rose-600' : 'from-si-blue-primary to-si-blue-secondary'} rounded-full`}
                                                                     />
                                                                 </div>
-                                                                <p className="text-[7px] text-white italic leading-[1.3] mt-1.5 pb-1">{stat.reasoning}</p>
+                                                                <p className="text-[7px] text-slate-500 italic leading-[1.3] mt-1.5 pb-1">{stat.reasoning}</p>
                                                             </div>
                                                         ))}
                                                     </div>
                                                 </div>
 
-                                                <div className="pt-6 border-t border-white/5 flex items-center justify-between">
+                                                <div className="pt-6 border-t border-slate-100 flex items-center justify-between">
                                                     <div className="flex items-center gap-3">
                                                         <div className="w-8 h-8 bg-si-blue-primary/10 rounded-lg flex items-center justify-center text-si-blue-primary border border-si-blue-primary/20">
                                                             <Globe className="w-4 h-4" />
                                                         </div>
                                                         <div className="flex-1">
-                                                            <p className="text-[9px] font-medium text-white/40 leading-tight italic max-w-[200px]">
+                                                            <p className="text-[9px] font-medium text-slate-400 leading-tight italic max-w-[200px]">
                                                                 {isGeneric ? "Generic profile active. Enhancing..." : "Verified organizational profile active."}
                                                             </p>
                                                         </div>
@@ -1042,9 +1042,9 @@ export default function WelcomePage() {
                                                             href={(activeDossier.website && !activeDossier.website.toLowerCase().includes("n/a") ? activeDossier.website : userProfile?.organization_website) || "#"}
                                                             target="_blank"
                                                             rel="noopener noreferrer"
-                                                            className="p-2.5 bg-white/5 hover:bg-si-blue-primary/20 rounded-xl border border-white/5 transition-colors group/link"
+                                                            className="p-2.5 bg-slate-50 hover:bg-si-blue-primary/10 rounded-xl border border-slate-100 transition-colors group/link"
                                                         >
-                                                            <ExternalLink className="w-3.5 h-3.5 text-white/40 group-hover/link:text-si-blue-primary transition-colors" />
+                                                            <ExternalLink className="w-3.5 h-3.5 text-slate-300 group-hover/link:text-si-blue-primary transition-colors" />
                                                         </a>
                                                     )}
                                                 </div>
